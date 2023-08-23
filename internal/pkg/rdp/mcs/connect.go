@@ -206,6 +206,7 @@ func (p *Protocol) Connect(userData []byte) (io.Reader, error) {
 	log.Println("MCS: Connect Response")
 
 	wire, err := p.x224Conn.Receive()
+
 	if err != nil {
 		return nil, err
 	}

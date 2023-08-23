@@ -82,7 +82,7 @@ func Connect(w http.ResponseWriter, r *http.Request) {
 
 	// TODO: implement
 	//rdpClient.SetRemoteApp("C:\\agent\\agent.exe", ".\\Downloads\\cbct1.zip", "C:\\Users\\Doc")
-	//rdpClient.SetRemoteApp("explore", "", "")
+	// rdpClient.SetRemoteApp(`C:\Windows\system32\notepad.exe`, "", "")
 
 	if err = rdpClient.Connect(); err != nil {
 		log.Println(fmt.Errorf("rdp connect: %w", err))
@@ -111,6 +111,7 @@ func wsToRdp(ctx context.Context, wsConn *websocket.Conn, rdpConn rdpConn, cance
 
 		_, data, err := wsConn.ReadMessage()
 		if err != nil {
+			log.Printf("Line 114: " + err.Error())
 			if strings.HasSuffix(err.Error(), "use of closed network connection") {
 				return
 			}

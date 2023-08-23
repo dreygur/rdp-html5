@@ -97,7 +97,10 @@ func (c *client) basicSettingsExchange() error {
 		return err
 	}
 
+	log.Println("Line 100: ", serverUserData.ServerNetworkData)
+
 	c.initChannels(serverUserData.ServerNetworkData)
+	log.Println("Line 103: ", serverUserData.ServerNetworkData)
 
 	log.Println("MCS: Server Connect Response: earlyCapabilityFlags: ", serverUserData.ServerCoreData.EarlyCapabilityFlags)
 
@@ -108,7 +111,7 @@ func (c *client) basicSettingsExchange() error {
 }
 
 func (c *client) initChannels(serverNetworkData *pdu.ServerNetworkData) {
-	if c.channels == nil {
+	if c.channelIDMap == nil {
 		c.channelIDMap = make(map[string]uint16, len(c.channels))
 	}
 
